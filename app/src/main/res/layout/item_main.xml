@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:clickable="true"
+    app:cardCornerRadius="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/main_head"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/image1"
+            android:layout_centerVertical="true"
+            app:border_width="1dp"
+            app:border_color="#fff"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amazing Title"
+            android:id="@+id/main_title"
+            android:textColor="@color/primary_text"
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/main_head"
+            android:layout_toEndOf="@+id/main_head" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="As this is just a custom ImageView."
+            android:id="@+id/main_content"
+            android:textColor="@color/secondary_text"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/main_title"
+            android:layout_alignLeft="@+id/main_title"
+            android:layout_alignStart="@+id/main_title" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

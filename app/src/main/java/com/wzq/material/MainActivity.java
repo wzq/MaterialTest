@@ -5,9 +5,16 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.wzq.material.adapter.MyAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
@@ -16,18 +23,38 @@ public class MainActivity extends BaseActivity {
 
     private ActionBarDrawerToggle drawerToggle;
 
+    private RecyclerView recyclerView;
+
+    private List<EasyMap> data = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        recyclerView = (RecyclerView) findViewById(R.id.main_recycler);
+        initView();
+    }
+
+    private void initView() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,R.string.app_name, R.string.app_name);
         drawerToggle.syncState();
         drawerLayout.setDrawerListener(drawerToggle);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        for (int i = 0; i < 50; i++) {
+            EasyMap temp = new EasyMap();
+            temp.put("title", "Great Title "+i);
+            temp.put("content", "The test content of number "+i);
+            data.add(temp);
+        }
+        recyclerView.setAdapter(new MyAdapter(data));
     }
 
     @Override
