@@ -1,4 +1,4 @@
-package com.wzq.material;
+package com.wzq.material.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+
+import com.wzq.material.R;
 
 /**
  * Created by wzq on 15/6/1.

@@ -1,8 +1,11 @@
-package com.wzq.material;
+package com.wzq.material.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,14 +13,17 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.wzq.material.R;
 import com.wzq.material.adapter.MyAdapter;
+import com.wzq.material.util.EasyMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     private DrawerLayout drawerLayout;
 
@@ -26,6 +32,12 @@ public class MainActivity extends BaseActivity {
     private RecyclerView recyclerView;
 
     private List<EasyMap> data = new ArrayList<>();
+
+    public static int[] pictures = {R.drawable.image_category_entertainment, R.drawable.image_category_food,
+            R.drawable.image_category_geography, R.drawable.image_category_music,
+            R.drawable.image_category_science, R.drawable.image_category_knowledge,
+            R.drawable.image_category_tvmovies, R.drawable.image_category_history,
+            R.drawable.image_category_sports};
 
 
     @Override
@@ -42,19 +54,20 @@ public class MainActivity extends BaseActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,R.string.app_name, R.string.app_name);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerToggle.syncState();
         drawerLayout.setDrawerListener(drawerToggle);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < pictures.length; i++) {
             EasyMap temp = new EasyMap();
-            temp.put("title", "Great Title "+i);
-            temp.put("content", "The test content of number "+i);
+            temp.put("title", "Great Title " + i);
+            temp.put("content", "The test content of number " + i);
+            temp.put("picture", pictures[i]);
             data.add(temp);
         }
-        recyclerView.setAdapter(new MyAdapter(data));
+        recyclerView.setAdapter(new MyAdapter(this, data, this));
     }
 
     @Override
@@ -76,7 +89,7 @@ public class MainActivity extends BaseActivity {
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-//    @Override
+    //    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -88,5 +101,13 @@ public class MainActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view.findViewById(R.id.main_picture), "image");
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("url", Integer.valueOf(view.getTag().toString()));
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 }

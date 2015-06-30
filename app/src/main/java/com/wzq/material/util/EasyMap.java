@@ -1,4 +1,4 @@
-package com.wzq.material;
+package com.wzq.material.util;
 
 import java.io.Serializable;
 import java.util.HashMap;
