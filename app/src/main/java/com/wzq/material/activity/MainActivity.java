@@ -1,11 +1,9 @@
 package com.wzq.material.activity;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,22 +14,24 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.wzq.material.R;
-import com.wzq.material.adapter.MyAdapter;
+import com.wzq.material.adapter.EasyAdapter;
+import com.wzq.material.fragment.ScaleUpFragment;
+import com.wzq.material.fragment.TransitionFragment;
+import com.wzq.material.fragment.TransitionListFragment;
+import com.wzq.material.util.DividerItemDecoration;
 import com.wzq.material.util.EasyMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity implements View.OnClickListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener, EasyAdapter.CallBack{
 
     private DrawerLayout drawerLayout;
 
     private ActionBarDrawerToggle drawerToggle;
 
-    private RecyclerView recyclerView;
-
-    private List<EasyMap> data = new ArrayList<>();
+    private RecyclerView drawerList;
 
     public static int[] pictures = {R.drawable.image_category_entertainment, R.drawable.image_category_food,
             R.drawable.image_category_geography, R.drawable.image_category_music,
@@ -39,17 +39,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             R.drawable.image_category_tvmovies, R.drawable.image_category_history,
             R.drawable.image_category_sports};
 
+    public static String[] types = {"Transition", "Transition List", "ScaleUp", "ThumbnailScaleUp", "Custom"};
 
+    public static Class<?>[] fragments = {TransitionFragment.class, TransitionListFragment.class, ScaleUpFragment.class};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        recyclerView = (RecyclerView) findViewById(R.id.main_recycler);
         initView();
     }
 
     private void initView() {
+        toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        drawerList = (RecyclerView) findViewById(R.id.main_drawer_list);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -58,16 +61,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         drawerToggle.syncState();
         drawerLayout.setDrawerListener(drawerToggle);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        drawerList.setLayoutManager(new LinearLayoutManager(this));
+        drawerList.addItemDecoration(new DividerItemDecoration(this, R.drawable.div_normal));
 
-        for (int i = 0; i < pictures.length; i++) {
+        initDrawerList();
+        selectFragment(0);
+    }
+
+    private void initDrawerList(){
+        List<Object> data = new ArrayList<>();
+        for (int i = 0; i < types.length; i++) {
             EasyMap temp = new EasyMap();
-            temp.put("title", "Great Title " + i);
-            temp.put("content", "The test content of number " + i);
-            temp.put("picture", pictures[i]);
+            temp.put("content",types[i]);
             data.add(temp);
         }
-        recyclerView.setAdapter(new MyAdapter(this, data, this));
+        EasyAdapter adapter = new EasyAdapter(data, R.layout.item_drawer, new int[]{R.id.drawer_content}, this);
+        drawerList.setAdapter(adapter);
+    }
+
+    public void selectFragment(int index){
+        try {
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, (Fragment) fragments[index].newInstance()).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -105,9 +122,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view.findViewById(R.id.main_picture), "image");
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("url", Integer.valueOf(view.getTag().toString()));
-        ActivityCompat.startActivity(this, intent, options.toBundle());
+        int index = (int) view.getTag();
+        selectFragment(index);
+        drawerLayout.closeDrawers();
+    }
+
+    @Override
+    public void bindItemView(EasyAdapter.EasyHolder holder, Object item, int position) {
+        EasyMap map = (EasyMap) item;
+        holder.textViews.get(0).setText(map.getString("content"));
+        holder.itemView.setTag(position);
+        holder.itemView.setOnClickListener(this);
     }
 }
