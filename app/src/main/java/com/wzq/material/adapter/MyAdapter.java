@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wzq.material.util.EasyMap;
+import com.github.wzq.utils.EasyMap;
 import com.wzq.material.R;
 
 import java.util.List;

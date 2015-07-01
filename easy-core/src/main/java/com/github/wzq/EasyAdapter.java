@@ -1,4 +1,4 @@
-package com.wzq.material.adapter;
+package com.github.wzq;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.wzq.material.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -13,13 +13,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.github.wzq.EasyAdapter;
+import com.github.wzq.utils.DividerItemDecoration;
+import com.github.wzq.utils.EasyMap;
 import com.wzq.material.R;
-import com.wzq.material.adapter.EasyAdapter;
 import com.wzq.material.fragment.ScaleUpFragment;
 import com.wzq.material.fragment.TransitionFragment;
 import com.wzq.material.fragment.TransitionListFragment;
-import com.wzq.material.util.DividerItemDecoration;
-import com.wzq.material.util.EasyMap;
 
 import java.util.ArrayList;
 import java.util.List;

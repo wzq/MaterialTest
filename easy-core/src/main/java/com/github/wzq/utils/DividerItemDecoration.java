@@ -1,4 +1,4 @@
-package com.wzq.material.util;
+package com.github.wzq.utils;
 
 import android.content.Context;
 import android.graphics.Canvas;

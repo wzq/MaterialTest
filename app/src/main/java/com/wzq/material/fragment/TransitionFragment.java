@@ -12,11 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.wzq.utils.EasyMap;
 import com.wzq.material.R;
 import com.wzq.material.activity.DetailActivity;
 import com.wzq.material.activity.MainActivity;
 import com.wzq.material.adapter.MyAdapter;
-import com.wzq.material.util.EasyMap;
 
 import java.util.ArrayList;
 import java.util.List;

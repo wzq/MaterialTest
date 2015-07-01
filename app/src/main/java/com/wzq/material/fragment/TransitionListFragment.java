@@ -13,11 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.wzq.utils.EasyMap;
 import com.wzq.material.R;
 import com.wzq.material.activity.DetailActivity;
 import com.wzq.material.activity.MainActivity;
 import com.wzq.material.adapter.MyAdapter;
-import com.wzq.material.util.EasyMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class TransitionListFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
         Pair[] arr = {Pair.create(view.findViewById(R.id.main_title), "title")};
-//Pair.create(view.findViewById(R.id.main_picture), "image")
+        Pair.create(view.findViewById(R.id.main_picture), "image");
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), arr);
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra("index", Integer.valueOf(view.getTag().toString()));
