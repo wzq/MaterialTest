@@ -11,3 +11,11 @@ Base on Material design.
 ### easy-core
 
 include recyclerview & listview adapter, some utils
+
+### Usage
+
+```groovy
+dependencies {
+    compile 'com.github.wzq:easy-core:1.0.0'
+}
+```
