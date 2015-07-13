@@ -39,6 +39,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             R.drawable.image_category_tvmovies, R.drawable.image_category_history,
             R.drawable.image_category_sports};
 
+    public static int[] logos = {R.drawable.icon_category_entertainment, R.drawable.icon_category_food,
+            R.drawable.icon_category_geography, R.drawable.icon_category_music,
+            R.drawable.icon_category_science, R.drawable.icon_category_knowledge,
+            R.drawable.icon_category_tvmovies, R.drawable.icon_category_history,
+            R.drawable.icon_category_sports};
+
     public static String[] types = {"Transition", "Transition List", "ScaleUp", "ThumbnailScaleUp", "Custom"};
 
     public static Class<?>[] fragments = {TransitionFragment.class, TransitionListFragment.class, ScaleUpFragment.class};

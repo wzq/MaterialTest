@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.graphics.Palette;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -42,5 +43,11 @@ public class DetailActivity extends BaseActivity {
             }
         });
         baseLoading.setVisibility(View.GONE);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return super.onOptionsItemSelected(item);
     }
 }

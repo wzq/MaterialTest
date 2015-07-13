@@ -7,7 +7,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,13 +34,13 @@ public class TransitionListFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.recycler_normal, container, false);
         recyclerView = (RecyclerView) root.findViewById(R.id.recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         List<EasyMap> data = new ArrayList<>();
         for (int i = 0; i < MainActivity.pictures.length; i++) {
             EasyMap temp = new EasyMap();
             temp.put("title", "Great Title " + i);
             temp.put("content", "The test content of number " + i);
-            temp.put("picture", MainActivity.pictures[i]);
+            temp.put("picture", MainActivity.logos[i]);
             data.add(temp);
         }
         recyclerView.setAdapter(new MyAdapter(getActivity(), data, this));
@@ -57,4 +57,5 @@ public class TransitionListFragment extends Fragment implements View.OnClickList
         intent.putExtra("title", "title "+view.getTag().toString());
         ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
     }
+
 }

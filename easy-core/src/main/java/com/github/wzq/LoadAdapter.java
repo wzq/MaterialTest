@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 /**
  * Created by wzq on 15/5/11.
+ * Only work on linear layout.
  */
 abstract public class LoadAdapter extends RecyclerView.OnScrollListener {
 
@@ -24,22 +25,29 @@ abstract public class LoadAdapter extends RecyclerView.OnScrollListener {
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        freeSpace(recyclerView, dx, dy);
-        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-        if (layoutManager instanceof LinearLayoutManager) {
-            LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
-            firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
-            visibleItems = linearLayoutManager.getChildCount();
-            totalItems = linearLayoutManager.getItemCount();
-            if ((visibleItems + firstVisibleItem) >= totalItems) {
-                loadData(totalItems);
+        if (!freeSpace(recyclerView, dx, dy)) {
+            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+            if (layoutManager instanceof LinearLayoutManager) {
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+                firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+                visibleItems = linearLayoutManager.getChildCount();
+                totalItems = linearLayoutManager.getItemCount();
+                if ((visibleItems + firstVisibleItem) >= totalItems) {
+                    loadData(totalItems);
+                }
             }
         }
     }
 
     abstract protected void loadData(int size);
 
-    protected void freeSpace(RecyclerView recyclerView, int dx, int dy) {
-
+    /**
+     * @param recyclerView
+     * @param dx
+     * @param dy
+     * @return If return true , the load method is not work.
+     */
+    protected boolean freeSpace(RecyclerView recyclerView, int dx, int dy) {
+        return false;
     }
 }
