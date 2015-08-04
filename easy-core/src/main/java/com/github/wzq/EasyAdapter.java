@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +23,18 @@ public class EasyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private int layoutId;
     private int[] viewId;
     private CallBack callBack;
+
+    private int lastPosition = -1;
+
+    public int getAnimId() {
+        return animId;
+    }
+
+    public void setAnimId(int animId) {
+        this.animId = animId;
+    }
+
+    private int animId = 0;
 
     public EasyAdapter(List<Object> data, int layoutId, int[] viewId, CallBack callBack) {
         this.data = data;
@@ -44,6 +58,7 @@ public class EasyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             EasyHolder holder = (EasyHolder) viewHolder;
             if (callBack != null) {
                 callBack.bindItemView(holder, data.get(position), position);
+                setAnimation(holder.itemView, position);
             }
         }
     }
@@ -128,4 +143,19 @@ public class EasyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemViewType(int position) {
         return (data.get(position) == null)?1:0;
     }
+
+     private void setAnimation(View viewToAnimate, int position) {
+        if (animId > 0 && position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), animId);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        holder.itemView.clearAnimation();
+    }
+
 }
