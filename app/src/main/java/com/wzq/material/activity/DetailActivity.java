@@ -9,7 +9,6 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.graphics.Palette;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.wzq.material.R;
@@ -29,7 +28,7 @@ public class DetailActivity extends BaseActivity {
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
-        //ViewCompat.setTransitionName(imageView, "image");
+        ViewCompat.setTransitionName(imageView, "image");
         ViewCompat.setTransitionName(toolbar, "title");
         setTitle(getIntent().getStringExtra("title"));
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), MainActivity.pictures[getIntent().getIntExtra("index", 0)]);
@@ -47,10 +46,11 @@ public class DetailActivity extends BaseActivity {
                 }
             }
         });
+
         imageView.setVisibility(View.VISIBLE);
-        imageView.setScaleX(0);
-        imageView.setScaleY(0);
-        imageView.animate().scaleX(1).scaleY(1).setInterpolator(AnimationUtils.loadInterpolator(this, android.R.interpolator.fast_out_slow_in)).setStartDelay(300).start();
+//        imageView.setScaleX(0);
+//        imageView.setScaleY(0);
+//        imageView.animate().scaleX(1).scaleY(1).setInterpolator(AnimationUtils.loadInterpolator(this, android.R.interpolator.fast_out_slow_in)).setStartDelay(300).start();
         baseLoading.setVisibility(View.GONE);
     }
 

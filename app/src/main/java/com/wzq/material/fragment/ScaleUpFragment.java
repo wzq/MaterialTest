@@ -82,5 +82,6 @@ public class ScaleUpFragment extends Fragment implements View.OnClickListener, E
             }
         });
         holder.itemView.setTag(position);
+        holder.itemView.setOnClickListener(this);
     }
 }
