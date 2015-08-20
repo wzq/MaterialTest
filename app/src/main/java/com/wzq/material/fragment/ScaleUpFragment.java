@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import com.github.wzq.EasyAdapter;
 import com.github.wzq.utils.EasyMap;
 import com.wzq.material.R;
-import com.wzq.material.activity.DetailActivity;
+import com.wzq.material.activity.CoordinatorActivity;
 import com.wzq.material.activity.MainActivity;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class ScaleUpFragment extends Fragment implements View.OnClickListener, E
         }
         int[] views = {R.id.main_picture, R.id.main_head, R.id.main_title, R.id.main_content};
         EasyAdapter adapter = new EasyAdapter(data, R.layout.item_main, views, this);
-        adapter.setAnimId(R.anim.rotate_bottom_in);
+        adapter.setAnimId(R.anim.slide_left_in);
         recyclerView.setAdapter(adapter);
         return root;
     }
@@ -55,7 +55,7 @@ public class ScaleUpFragment extends Fragment implements View.OnClickListener, E
     @Override
     public void onClick(View view) {
         ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(view, view.getWidth()/2, view.getHeight()/2, 0, 0);
-        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        Intent intent = new Intent(getActivity(), CoordinatorActivity.class);
         intent.putExtra("index", Integer.valueOf(view.getTag().toString()));
         intent.putExtra("title", "title "+view.getTag().toString());
         ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
