@@ -63,35 +63,39 @@ public class EasyListAdapter extends BaseAdapter {
 	}
 
 	public class ViewHolder {
-		public List<ImageView> imageViews;
-		public List<TextView> textViews;
-		public List<Button> buttons;
-		public List<View> views;
 		public View itemView;
+		public ImageView[] imageViews;
+		public TextView[] textViews;
+		public Button[] buttons;
+		public View[] views;
 
 		public ViewHolder(View root) {
 			itemView = root;
-			imageViews = new ArrayList<>();
-			textViews = new ArrayList<>();
-			buttons = new ArrayList<>();
-			views = new ArrayList<>();
-			for (int i = 0; i < viewId.length; i++) {
-				View temp = root.findViewById(viewId[i]);
+			load(root);
+		}
+		private void load(View itemView) {
+			List<ImageView> list1 = new ArrayList<>();
+			List<Button> list2 = new ArrayList<>();
+			List<TextView> list3 = new ArrayList<>();
+			List<View> list4 = new ArrayList<>();
+			for (int id : viewId) {
+				View temp = itemView.findViewById(id);
 				if (temp instanceof ImageView) {
-					imageViews.add((ImageView) temp);
-					continue;
+					list1.add((ImageView) temp);
 				} else if (temp instanceof TextView) {
 					if (temp instanceof Button) {
-						buttons.add((Button) temp);
+						list2.add((Button) temp);
 					}else{
-						textViews.add((TextView) temp);
+						list3.add((TextView) temp);
 					}
-					continue;
 				} else {
-					views.add(temp);
-					continue;
+					list4.add(temp);
 				}
 			}
+			imageViews = list1.toArray(new ImageView[list1.size()]);
+			buttons = list2.toArray(new Button[list2.size()]);
+			textViews =  list3.toArray(new TextView[list3.size()]);
+			views = list4.toArray(new View[list4.size()]);
 		}
 	}
 	

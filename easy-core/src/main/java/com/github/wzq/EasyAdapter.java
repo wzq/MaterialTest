@@ -43,12 +43,22 @@ public class EasyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.callBack = callBack;
     }
 
+    private int loadView = R.layout.load_default;
+
+    public int getLoadView() {
+        return loadView;
+    }
+
+    public void setLoadView(int loadView) {
+        this.loadView = loadView;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         if(viewType == 0) {
             return new EasyHolder(LayoutInflater.from(viewGroup.getContext()).inflate(layoutId, viewGroup, false), viewId);
         }else{
-            return new LoadHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.load_default, viewGroup, false));
+            return new LoadHolder(LayoutInflater.from(viewGroup.getContext()).inflate(getLoadView(), viewGroup, false));
         }
     }
 
@@ -95,33 +105,39 @@ public class EasyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public static class EasyHolder extends RecyclerView.ViewHolder {
-        public List<ImageView> imageViews;
-        public List<TextView> textViews;
-        public List<Button> buttons;
-        public List<View> views;
+        public ImageView[] imageViews;
+        public TextView[] textViews;
+        public Button[] buttons;
+        public View[] views;
 
         public EasyHolder(View itemView, int[] viewId) {
             super(itemView);
-            imageViews = new ArrayList<>();
-            textViews = new ArrayList<>();
-            buttons = new ArrayList<>();
-            for (int i = 0; i < viewId.length; i++) {
-                View temp = itemView.findViewById(viewId[i]);
+            load(itemView, viewId);
+        }
+
+        private void load(View itemView, int[] viewId) {
+            List<ImageView> list1 = new ArrayList<>();
+            List<Button> list2 = new ArrayList<>();
+            List<TextView> list3 = new ArrayList<>();
+            List<View> list4 = new ArrayList<>();
+            for (int id : viewId) {
+                View temp = itemView.findViewById(id);
                 if (temp instanceof ImageView) {
-                    imageViews.add((ImageView) temp);
-                    continue;
+                    list1.add((ImageView) temp);
                 } else if (temp instanceof TextView) {
                     if (temp instanceof Button) {
-                        buttons.add((Button) temp);
+                        list2.add((Button) temp);
                     }else{
-                        textViews.add((TextView) temp);
+                        list3.add((TextView) temp);
                     }
-                    continue;
                 } else {
-                    views.add(temp);
-                    continue;
+                    list4.add(temp);
                 }
             }
+            imageViews = list1.toArray(new ImageView[list1.size()]);
+            buttons = list2.toArray(new Button[list2.size()]);
+            textViews =  list3.toArray(new TextView[list3.size()]);
+            views = list4.toArray(new View[list4.size()]);
         }
     }
 
@@ -131,7 +147,7 @@ public class EasyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public interface  CallBack{
+    public interface CallBack{
         void bindItemView(EasyHolder holder, Object item, int position);
     }
 

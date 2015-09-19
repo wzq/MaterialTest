@@ -47,7 +47,7 @@ public class ScaleUpFragment extends Fragment implements View.OnClickListener, E
         }
         int[] views = {R.id.main_picture, R.id.main_head, R.id.main_title, R.id.main_content};
         EasyAdapter adapter = new EasyAdapter(data, R.layout.item_main, views, this);
-        adapter.setAnimId(R.anim.slide_left_in);
+        adapter.setAnimId(R.anim.bottom_in);
         recyclerView.setAdapter(adapter);
         return root;
     }
@@ -64,18 +64,18 @@ public class ScaleUpFragment extends Fragment implements View.OnClickListener, E
     @Override
     public void bindItemView(final EasyAdapter.EasyHolder holder, Object item, final int position) {
         EasyMap map = (EasyMap) item;
-        holder.textViews.get(0).setText(map.getString("title"));
-        holder.textViews.get(1).setText(map.getString("content"));
+        holder.textViews[0].setText(map.getString("title"));
+        holder.textViews[1].setText(map.getString("content"));
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), map.getInt("picture", R.mipmap.ic_launcher));
-        holder.imageViews.get(0).setImageBitmap(bitmap);
+        holder.imageViews[0].setImageBitmap(bitmap);
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
                 if (palette.getVibrantSwatch() != null) {
-                    holder.imageViews.get(0).setBackgroundColor(palette.getVibrantSwatch().getRgb());
+                    holder.imageViews[0].setBackgroundColor(palette.getVibrantSwatch().getRgb());
                 } else {
                     for (Palette.Swatch swatch : palette.getSwatches()) {
-                        holder.imageViews.get(0).setBackgroundColor(swatch.getRgb());
+                        holder.imageViews[0].setBackgroundColor(swatch.getRgb());
                         break;
                     }
                 }

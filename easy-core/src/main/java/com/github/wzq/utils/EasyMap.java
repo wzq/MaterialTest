@@ -12,8 +12,6 @@ public class EasyMap extends HashMap<String, Object> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final String TAG = "EasyMapLog";
-
     public EasyMap() {
         super();
     }
@@ -21,6 +19,19 @@ public class EasyMap extends HashMap<String, Object> implements Serializable {
     public EasyMap(Map<String, Object> map) {
         super(map);
     }
+
+    //-- new support --
+
+    public static EasyMap call(){
+        return new EasyMap();
+    }
+
+    public EasyMap chainPut(String key, Object value){
+        this.put(key, value);
+        return this;
+    }
+
+    //-----
 
     public int getInt(String key, int def) {
         Object temp = this.get(key);
@@ -56,19 +67,11 @@ public class EasyMap extends HashMap<String, Object> implements Serializable {
         return check(temp) ? Boolean.parseBoolean(temp.toString()) : null;
     }
 
-    public String getDateString(String key, String pattern) {
-        return FormatUtil.formatDate(this.getString(key), pattern);
-    }
-
     public String getString(String key, int len) {
         String temp = this.getString(key);
         return temp.length() > len ? temp.substring(0, len - 1) + "..." : temp;
     }
 
-    public String getMoney(String key) {
-        Object temp = this.get(key);
-        return "￥" + FormatUtil.formatNumber(check(temp) ? temp.toString() : "0");
-    }
 
     private boolean check(Object temp) {
         return temp != null && !temp.toString().equals("null");

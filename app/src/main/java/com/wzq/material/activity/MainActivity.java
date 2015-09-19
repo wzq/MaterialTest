@@ -136,7 +136,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void bindItemView(EasyAdapter.EasyHolder holder, Object item, int position) {
         EasyMap map = (EasyMap) item;
-        holder.textViews.get(0).setText(map.getString("content"));
+        holder.textViews[0].setText(map.getString("content"));
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(this);
     }

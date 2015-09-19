@@ -20,6 +20,8 @@
             android:id="@+id/main_picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:src="@drawable/image_category_geography"
             android:scaleType="fitCenter"/>
         <RelativeLayout
             android:layout_width="match_parent"
