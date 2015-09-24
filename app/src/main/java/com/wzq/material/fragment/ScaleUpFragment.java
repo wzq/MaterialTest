@@ -1,14 +1,12 @@
 package com.wzq.material.fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.graphics.Palette;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.github.wzq.EasyAdapter;
 import com.github.wzq.utils.EasyMap;
+import com.squareup.picasso.Picasso;
 import com.wzq.material.R;
 import com.wzq.material.activity.CoordinatorActivity;
 import com.wzq.material.activity.MainActivity;
@@ -27,9 +26,11 @@ import java.util.List;
 /**
  * Created by wzq on 15/6/30.
  */
-public class ScaleUpFragment extends Fragment implements View.OnClickListener, EasyAdapter.CallBack{
+public class ScaleUpFragment extends Fragment implements View.OnClickListener, EasyAdapter.CallBack, SwipeRefreshLayout.OnRefreshListener{
 
     private RecyclerView recyclerView;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -37,6 +38,8 @@ public class ScaleUpFragment extends Fragment implements View.OnClickListener, E
         View root = inflater.inflate(R.layout.recycler_normal, container, false);
         recyclerView = (RecyclerView) root.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        swipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(this);
         List<Object> data = new ArrayList<>();
         for (int i = 0; i < MainActivity.pictures.length; i++) {
             EasyMap temp = new EasyMap();
@@ -57,31 +60,24 @@ public class ScaleUpFragment extends Fragment implements View.OnClickListener, E
         ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(view, view.getWidth()/2, view.getHeight()/2, 0, 0);
         Intent intent = new Intent(getActivity(), CoordinatorActivity.class);
         intent.putExtra("index", Integer.valueOf(view.getTag().toString()));
-        intent.putExtra("title", "title "+view.getTag().toString());
+        intent.putExtra("title", "title " + view.getTag().toString());
         ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
     }
 
     @Override
     public void bindItemView(final EasyAdapter.EasyHolder holder, Object item, final int position) {
-        EasyMap map = (EasyMap) item;
+        final EasyMap map = (EasyMap) item;
         holder.textViews[0].setText(map.getString("title"));
         holder.textViews[1].setText(map.getString("content"));
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), map.getInt("picture", R.mipmap.ic_launcher));
-        holder.imageViews[0].setImageBitmap(bitmap);
-        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-            @Override
-            public void onGenerated(Palette palette) {
-                if (palette.getVibrantSwatch() != null) {
-                    holder.imageViews[0].setBackgroundColor(palette.getVibrantSwatch().getRgb());
-                } else {
-                    for (Palette.Swatch swatch : palette.getSwatches()) {
-                        holder.imageViews[0].setBackgroundColor(swatch.getRgb());
-                        break;
-                    }
-                }
-            }
-        });
+
+
+        Picasso.with(getActivity()).load(map.getInt("picture", R.mipmap.ic_launcher)).into(holder.imageViews[0]);
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 }

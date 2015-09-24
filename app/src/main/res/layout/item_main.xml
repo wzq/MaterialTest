@@ -21,7 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:src="@drawable/image_category_geography"
             android:scaleType="fitCenter"/>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -49,6 +48,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_toEndOf="@+id/main_head"
                 android:layout_toRightOf="@+id/main_head"
+                android:singleLine="true"
                 android:text="Amazing Title"
                 android:textColor="@color/primary_text"
                 android:textSize="18sp" />
@@ -60,6 +60,7 @@
                 android:layout_alignLeft="@+id/main_title"
                 android:layout_alignStart="@+id/main_title"
                 android:layout_below="@+id/main_title"
+                android:singleLine="true"
                 android:layout_marginTop="5dp"
                 android:text="As this is just a custom ImageView."
                 android:textColor="@color/secondary_text" />

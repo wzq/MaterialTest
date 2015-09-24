@@ -36,7 +36,7 @@ public class CoordinatorActivity extends BaseActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(baseBody, "11111s", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(baseBody, "Snack message test.", Snackbar.LENGTH_LONG).show();
             }
         });
         baseLoading.setVisibility(View.GONE);

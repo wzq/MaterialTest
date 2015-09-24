@@ -16,3 +16,4 @@
 #   public *;
 #}
 -keep class me.zhanghai.android.materialprogressbar.** { *; }
+-dontwarn com.squareup.okhttp.**

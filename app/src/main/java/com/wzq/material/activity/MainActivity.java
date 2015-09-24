@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             R.drawable.icon_category_tvmovies, R.drawable.icon_category_history,
             R.drawable.icon_category_sports};
 
-    public static String[] types = {"Transition", "Transition List", "ScaleUp", "ThumbnailScaleUp", "Custom"};
+    public static String[] types = {"Transition", "Transition List", "ScaleUp"};
 
     public static Class<?>[] fragments = {TransitionFragment.class, TransitionListFragment.class, ScaleUpFragment.class};
     @Override
