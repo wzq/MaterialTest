@@ -1,8 +1,8 @@
 package com.github.wzq;
 
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.widget.LinearLayoutManager;
+import androidx.appcompat.widget.RecyclerView;
 
 /**
  * Created by wzq on 15/5/11.

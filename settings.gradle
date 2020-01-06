@@ -1,1 +1,2 @@
-include ':app', ':easy-core'
+include ':app'
+rootProject.name='MaterialTest'
