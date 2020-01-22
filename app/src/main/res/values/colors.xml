@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#fff</color>
+    <color name="white_50">#EEF0F2</color>
+
     <color name="black">#000</color>
 
+
+    <color name="m_yellow">#fbc02d</color>
+    <color name="m_yellow_light">#fff263</color>
+
+    <color name="m_blue">#004ba0</color>
+    <color name="m_blue_light">#1976d2</color>
+    
 
     <color name="reply_white_50_alpha_060">#99ffffff</color>
 

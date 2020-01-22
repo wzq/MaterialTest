@@ -8,7 +8,9 @@ import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.test.databinding.FragmentHomeBinding
+import com.example.test.util.ReboundingSwipeActionCallback
 
 class HomeFragment : Fragment() {
 
@@ -22,7 +24,11 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        val itemTouchHelper = ItemTouchHelper(ReboundingSwipeActionCallback())
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
         binding.recyclerView.adapter = adapter
+
         return binding.root
     }
 
@@ -32,8 +38,8 @@ class HomeFragment : Fragment() {
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
 
-        viewModel.news.observe(viewLifecycleOwner) {
-            adapter.submitList(it.results.android)
+        viewModel.data.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
         }
     }
 }

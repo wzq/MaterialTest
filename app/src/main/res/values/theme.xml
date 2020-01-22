@@ -3,22 +3,21 @@
 
     <style name="AppTheme" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
     <style name="AppTheme.Yellow" >
-        <item name="colorPrimary">#fbc02d</item>
-        <item name="colorPrimaryVariant">#fff263</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/m_yellow</item>
+        <item name="colorPrimaryVariant">@color/m_yellow_light</item>
+        <item name="colorSecondary">@color/m_blue</item>
+        <item name="colorSecondaryVariant">@color/m_blue_light</item>
 
-        <item name="colorSecondary">#004ba0</item>
-        <item name="colorSecondaryVariant">#1976d2</item>
-        <item name="colorOnSecondary">@color/white</item>
-        
-        <item name="android:colorBackground">@color/white</item>
-        <item name="colorOnBackground">@color/black</item>
-        
+        <item name="android:colorBackground">@color/white_50</item>
         <item name="colorSurface">@color/white</item>
+        <item name="colorPrimarySurfaceVariant">?attr/colorPrimaryVariant</item>
+        <item name="colorError">#EF5350</item>
+
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnBackground">@color/black</item>
+        <item name="colorOnError">@color/black</item>
         <item name="colorOnSurface">@color/black</item>
-        
-        <item name="colorError">#C51162</item>
-        <item name="colorOnError">@color/white</item>
 
         <item name="scrimBackground">@color/reply_white_50_alpha_060</item>
         <item name="android:statusBarColor">#fbc02d</item>
