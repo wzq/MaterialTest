@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
     <style name="AppTheme.Yellow" >
@@ -19,6 +19,14 @@
         
         <item name="colorError">#C51162</item>
         <item name="colorOnError">@color/white</item>
+
+        <item name="scrimBackground">@color/reply_white_50_alpha_060</item>
+        <item name="android:statusBarColor">#fbc02d</item>
+        <item name="android:navigationBarColor">@color/reply_black_900_alpha_020</item>
+
+        <!--System/Platform attributes-->
+        <item name="android:windowBackground">?android:colorBackground</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MaterialTest</string>
     <string name="action_settings">Settings</string>
+
+
+    <string name="home_item_transition_name">home_card_%1$s</string>
+
 </resources>
